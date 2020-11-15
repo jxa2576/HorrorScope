@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
+mongoose.set('useFindAndModify', false);
 
 let AccountModel = {};
 const iterations = 10000;
@@ -72,6 +73,65 @@ AccountSchema.statics.authenticate = (username, password, callback) => {
     }
 
     return validatePassword(doc, password, (result) => {
+      if (result === true) {
+        return callback(null, doc);
+      }
+
+      return callback();
+    });
+  });
+};
+
+AccountSchema.statics.findByUsernameAndUpdateSalt = (name, salt, callback) => {
+  const search = {
+    username: name,
+  };
+
+  const update = {
+    salt,
+  };
+  return AccountModel.findOneAndUpdate(search, update, callback);
+};
+
+AccountSchema.statics.findByUsernameAndUpdateHash = (name, hash, callback) => {
+  const search = {
+    username: name,
+  };
+
+  const update = {
+    password: hash,
+  };
+  return AccountModel.findOneAndUpdate(search, update, callback);
+};
+
+AccountSchema.statics.changeUserPassword = (name, pass, salt, hash, callback) => {
+  AccountModel.findByUsernameAndUpdateSalt(name, salt, (err, doc) => {
+    if (err) {
+      return callback(err);
+    }
+
+    if (!doc) {
+      return callback();
+    }
+
+    return validatePassword(doc, pass, (result) => {
+      if (result === true) {
+        return callback(null, doc);
+      }
+
+      return callback();
+    });
+  });
+  AccountModel.findByUsernameAndUpdateHash(name, hash, (err, doc) => {
+    if (err) {
+      return callback(err);
+    }
+
+    if (!doc) {
+      return callback();
+    }
+
+    return validatePassword(doc, pass, (result) => {
       if (result === true) {
         return callback(null, doc);
       }

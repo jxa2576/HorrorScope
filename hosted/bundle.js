@@ -1,5 +1,44 @@
 "use strict";
 
+//Mock Data for horrorscope poem -TEMP will be moved to the DB
+var data = {
+  "horrors": [{
+    "name": "Gremlin",
+    "poem": ["Gremlin 0", "Gremlin 1", "Gremlin 2"]
+  }, {
+    "name": "Spectre",
+    "poem": ["Spectre 0", "Spectre 1", "Spectre 2"]
+  }, {
+    "name": "Thing",
+    "poem": ["Thing 0", "Thing 1", "Thing 2"]
+  }]
+};
+var poem = ""; //Get random number taken
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+
+var getRandomInt = function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}; //Given the JSON data, generates a random poen for the user
+
+
+var randomHorrorPoem = function randomHorrorPoem() {
+  var randomHorrors = [];
+  var rand = getRandomInt(3);
+  var rand1 = getRandomInt(3);
+  var rand2 = getRandomInt(3);
+
+  while (rand === rand1 || rand1 === rand2 || rand2 === rand) {
+    rand1 = getRandomInt(3);
+    rand2 = getRandomInt(3);
+  }
+
+  ;
+  randomHorrors.push(data.horrors[rand].poem[0]);
+  randomHorrors.push(data.horrors[rand1].poem[1]);
+  randomHorrors.push(data.horrors[rand2].poem[2]);
+  poem = randomHorrors;
+};
+
 var Welcome = function Welcome(props) {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Welcome"), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
@@ -9,7 +48,7 @@ var Welcome = function Welcome(props) {
 };
 
 var HorrorScope = function HorrorScope(props) {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Horror Scope"), /*#__PURE__*/React.createElement("input", {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Horror Scope"), /*#__PURE__*/React.createElement("p", null, poem[0]), /*#__PURE__*/React.createElement("p", null, poem[1]), /*#__PURE__*/React.createElement("p", null, poem[2]), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf
@@ -17,15 +56,83 @@ var HorrorScope = function HorrorScope(props) {
 };
 
 var Compendium = function Compendium(props) {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Compendium"), /*#__PURE__*/React.createElement("input", {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Compendium"), /*#__PURE__*/React.createElement("p", null, data.horrors[0].name), /*#__PURE__*/React.createElement("p", null, data.horrors[1].name), /*#__PURE__*/React.createElement("p", null, data.horrors[2].name), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf
   }));
 };
 
+var handleChangePassword = function handleChangePassword(e) {
+  e.preventDefault();
+  $("#animatedErrorMessage").animate({
+    width: 'hide'
+  }, 350);
+
+  if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '' || $("#pass3").val() == '') {
+    handleError("All fields required");
+    return false;
+  }
+
+  if ($("#pass").val() !== $("#pass2").val()) {
+    handleError("Passwords do not match");
+    return false;
+  }
+
+  if ($("#pass").val() === $("#pass3").val()) {
+    handleError("Can't set the same password");
+    return false;
+  }
+
+  sendAjax('POST', $("#changePasswordForm").attr("action"), $("#changePasswordForm").serialize(), redirect);
+  return false;
+};
+
 var Profile = function Profile(props) {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Profile"), /*#__PURE__*/React.createElement("input", {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Profile"), /*#__PURE__*/React.createElement("form", {
+    id: "changePasswordForm",
+    name: "changePasswordForm",
+    onSubmit: handleChangePassword,
+    action: "/changePassword",
+    method: "POST",
+    className: "mainForm"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "username"
+  }, "Username: "), /*#__PURE__*/React.createElement("input", {
+    id: "user",
+    type: "text",
+    name: "username",
+    placeholder: "username"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "pass"
+  }, "Current Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "pass",
+    type: "password",
+    name: "pass",
+    placeholder: "password"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "pass2"
+  }, "Current Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "pass2",
+    type: "password",
+    name: "pass2",
+    placeholder: "retype password"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "pass3"
+  }, "New Password: "), /*#__PURE__*/React.createElement("input", {
+    id: "pass3",
+    type: "password",
+    name: "pass3",
+    placeholder: "new password"
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "hidden",
+    name: "_csrf",
+    value: props.csrf
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "formSubmit",
+    type: "submit",
+    value: "Change Password"
+  })), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf
@@ -83,6 +190,8 @@ var setup = function setup(csrf) {
   });
   createWelcome(csrf);
 };
+
+window.onload = randomHorrorPoem;
 "use strict";
 
 var handleError = function handleError(message) {
