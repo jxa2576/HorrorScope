@@ -131,13 +131,7 @@ AccountSchema.statics.changeUserPassword = (name, pass, salt, hash, callback) =>
       return callback();
     }
 
-    return validatePassword(doc, pass, (result) => {
-      if (result === true) {
-        return callback(null, doc);
-      }
-
-      return callback();
-    });
+    return null;
   });
 };
 
