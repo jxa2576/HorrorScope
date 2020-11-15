@@ -58,7 +58,7 @@ var HorrorScope = function HorrorScope(props) {
 };
 
 var Compendium = function Compendium(props) {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Compendium"), /*#__PURE__*/React.createElement("p", null, data.horrors[0].name), /*#__PURE__*/React.createElement("p", null, data.horrors[1].name), /*#__PURE__*/React.createElement("p", null, data.horrors[2].name), /*#__PURE__*/React.createElement("input", {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Compendium"), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, data.horrors[0].name), /*#__PURE__*/React.createElement("li", null, data.horrors[1].name), /*#__PURE__*/React.createElement("li", null, data.horrors[2].name)), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf

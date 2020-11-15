@@ -60,9 +60,11 @@ const Compendium = (props) => {
     return(
     <div>
         <h3>Compendium</h3>
-        <p>{data.horrors[0].name}</p>
-        <p>{data.horrors[1].name}</p>
-        <p>{data.horrors[2].name}</p>
+        <ul>
+            <li>{data.horrors[0].name}</li>
+            <li>{data.horrors[1].name}</li>
+            <li>{data.horrors[2].name}</li>
+        </ul>
         <input type="hidden" name="_csrf" value={props.csrf} />
     </div>
     );
