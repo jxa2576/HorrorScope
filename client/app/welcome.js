@@ -1,9 +1,9 @@
 //Mock Data for horrorscope poem -TEMP will be moved to the DB
 const data = {
     "horrors": [
-        {"name":"Gremlin", "poem":["Gremlin 0", "Gremlin 1", "Gremlin 2"]},
-        {"name":"Spectre", "poem":["Spectre 0", "Spectre 1", "Spectre 2"]},
-        {"name":"Thing", "poem":["Thing 0", "Thing 1", "Thing 2"]}
+        {"name":"Gremlin", "poem":["dancing,", "they steal from you", "a chaotic jubilation"]},
+        {"name":"Spectre", "poem":["screaming, ", "they posses you", "a soulful mourning"]},
+        {"name":"Thing", "poem":["morphing, ", "they mimic you", "a mutated limb"]}
     ]
 };
 let poem = "";
@@ -33,10 +33,12 @@ const randomHorrorPoem = () => {
     poem = randomHorrors;
 };
 
+const name = document.getElementById('username').innerHTML;
+
 const Welcome = (props) => {
     return(
     <div>
-        <h3>Welcome</h3>
+        <h3>Welcome {name}</h3>
         <input type="hidden" name="_csrf" value={props.csrf} />
     </div>
     );
@@ -102,8 +104,7 @@ const Profile = (props) => {
             method="POST"
             className="mainForm"
         >
-        <label htmlFor="username">Username: </label>
-        <input id="user" type="text" name="username" placeholder="username"/>
+        <input id="user" type="hidden" name="username" value={name} readOnly/>
         <label htmlFor="pass">Current Password: </label>
         <input id="pass" type="password" name="pass" placeholder="password"/>
         <label htmlFor="pass2">Current Password: </label>

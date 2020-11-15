@@ -4,13 +4,13 @@
 var data = {
   "horrors": [{
     "name": "Gremlin",
-    "poem": ["Gremlin 0", "Gremlin 1", "Gremlin 2"]
+    "poem": ["dancing,", "they steal from you", "a chaotic jubilation"]
   }, {
     "name": "Spectre",
-    "poem": ["Spectre 0", "Spectre 1", "Spectre 2"]
+    "poem": ["screaming, ", "they posses you", "a soulful mourning"]
   }, {
     "name": "Thing",
-    "poem": ["Thing 0", "Thing 1", "Thing 2"]
+    "poem": ["morphing, ", "they mimic you", "a mutated limb"]
   }]
 };
 var poem = ""; //Get random number taken
@@ -39,8 +39,10 @@ var randomHorrorPoem = function randomHorrorPoem() {
   poem = randomHorrors;
 };
 
+var name = document.getElementById('username').innerHTML;
+
 var Welcome = function Welcome(props) {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Welcome"), /*#__PURE__*/React.createElement("input", {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Welcome ", name), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf
@@ -96,13 +98,12 @@ var Profile = function Profile(props) {
     action: "/changePassword",
     method: "POST",
     className: "mainForm"
-  }, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "username"
-  }, "Username: "), /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("input", {
     id: "user",
-    type: "text",
+    type: "hidden",
     name: "username",
-    placeholder: "username"
+    value: name,
+    readOnly: true
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "pass"
   }, "Current Password: "), /*#__PURE__*/React.createElement("input", {

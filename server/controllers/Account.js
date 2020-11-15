@@ -91,8 +91,6 @@ const changePassword = (req, res) => {
     return res.status(400).json({ error: 'Can not set same password' });
   }
 
-  console.dir(`Changing password: From ${pass} to ${pass3}`);
-
   return Account.AccountModel.generateHash(pass3,
     (salt, hash) => Account.AccountModel.changeUserPassword(user, pass, salt, hash, (err, doc) => {
       if (err || !doc) {
