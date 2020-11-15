@@ -1,28 +1,88 @@
 "use strict";
 
-var Hello = function Hello(props) {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Hello "), /*#__PURE__*/React.createElement("input", {
+var Welcome = function Welcome(props) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Welcome"), /*#__PURE__*/React.createElement("input", {
     type: "hidden",
     name: "_csrf",
     value: props.csrf
   }));
 };
 
-var setup = function setup(csrf) {
-  ReactDOM.render( /*#__PURE__*/React.createElement(Hello, {
+var HorrorScope = function HorrorScope(props) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Horror Scope"), /*#__PURE__*/React.createElement("input", {
+    type: "hidden",
+    name: "_csrf",
+    value: props.csrf
+  }));
+};
+
+var Compendium = function Compendium(props) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Compendium"), /*#__PURE__*/React.createElement("input", {
+    type: "hidden",
+    name: "_csrf",
+    value: props.csrf
+  }));
+};
+
+var Profile = function Profile(props) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Profile"), /*#__PURE__*/React.createElement("input", {
+    type: "hidden",
+    name: "_csrf",
+    value: props.csrf
+  }));
+};
+
+var createWelcome = function createWelcome(csrf) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(Welcome, {
     csrf: csrf
-  }), document.getElementById('hello'));
+  }), document.getElementById('content'));
 };
 
-var getToken = function getToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
-    setup(result.csrfToken);
+var createHorrorScope = function createHorrorScope(csrf) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(HorrorScope, {
+    csrf: csrf
+  }), document.getElementById('content'));
+};
+
+var createCompendium = function createCompendium(csrf) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(Compendium, {
+    csrf: csrf
+  }), document.getElementById('content'));
+};
+
+var createProfile = function createProfile(csrf) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(Profile, {
+    csrf: csrf
+  }), document.getElementById('content'));
+};
+
+var setup = function setup(csrf) {
+  var welcomeButton = document.getElementById('welcomeButton');
+  var horrorScopeButton = document.getElementById('horrorScopeButton');
+  var compendiumButton = document.getElementById('compendiumButton');
+  var profileButton = document.getElementById('profileButton');
+  welcomeButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    createWelcome(csrf);
+    return false;
   });
+  horrorScopeButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    createHorrorScope(csrf);
+    return false;
+  });
+  compendiumButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    createCompendium(csrf);
+    return false;
+  });
+  profileButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    createProfile(csrf);
+    return false;
+  });
+  createWelcome(csrf);
 };
-
-$(document).ready(function () {
-  getToken();
-});
 "use strict";
 
 var handleError = function handleError(message) {
@@ -53,3 +113,13 @@ var sendAjax = function sendAjax(type, action, data, success) {
     }
   });
 };
+
+var getToken = function getToken() {
+  sendAjax('GET', '/getToken', null, function (result) {
+    setup(result.csrfToken);
+  });
+};
+
+$(document).ready(function () {
+  getToken();
+});
