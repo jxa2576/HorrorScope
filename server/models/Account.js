@@ -82,6 +82,8 @@ AccountSchema.statics.authenticate = (username, password, callback) => {
   });
 };
 
+// The below functions cover the password change
+// Update salt
 AccountSchema.statics.findByUsernameAndUpdateSalt = (name, salt, callback) => {
   const search = {
     username: name,
@@ -92,7 +94,7 @@ AccountSchema.statics.findByUsernameAndUpdateSalt = (name, salt, callback) => {
   };
   return AccountModel.findOneAndUpdate(search, update, callback);
 };
-
+// Update hash
 AccountSchema.statics.findByUsernameAndUpdateHash = (name, hash, callback) => {
   const search = {
     username: name,
@@ -103,7 +105,7 @@ AccountSchema.statics.findByUsernameAndUpdateHash = (name, hash, callback) => {
   };
   return AccountModel.findOneAndUpdate(search, update, callback);
 };
-
+// Sets the new password
 AccountSchema.statics.changeUserPassword = (name, pass, salt, hash, callback) => {
   AccountModel.findByUsernameAndUpdateSalt(name, salt, (err, doc) => {
     if (err) {

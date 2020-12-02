@@ -33,6 +33,13 @@ ul li {
     width: 64px;
 }
 
+#ad {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 nav {
     width: 100%;
     float: left;

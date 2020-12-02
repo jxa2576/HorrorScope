@@ -73,6 +73,7 @@ const signup = (req, res) => {
   });
 };
 
+// Handles password change
 const changePassword = (req, res) => {
   const user = `${req.body.username}`;
   const pass = `${req.body.pass}`;

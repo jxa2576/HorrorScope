@@ -12,16 +12,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
-<body> 
-  <nav><a href="/login"><img id="logo" src="/assets/img/cosmicEntity.png" alt="cosmic entity"/></a>
-    <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
-    <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
+<body>
+  <nav><a href="/welcome"><img id="logo" src="/assets/img/cosmicEntity.png" alt="cosmic entity"/></a>
+    <div class="navlink"><a href="/welcome">Horror Scope</a></div>
+    <div class="navlink"><a href="/logout">Log out</a></div>
+    <div id="username" hidden="true">{{userName}}</div>
+    <div id="poem" hidden="true">
+      <p id="poem0">{{poem0}}</p>
+      <p id="poem1">{{poem1}}</p>
+      <p id="poem2">{{poem2}}</p>
+    </div>
   </nav>
-  <section id="content"></section>
+  <div id="content">
+    {{#if horrors}}
+    <ul>
+      {{#each horrors}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+    {{/if}}
+  </div>
   <div id="animatedErrorMessage">
     <h3><span id="errorMessage"></span></h3><img id="cosmicEntity" src="assets/img/cosmicEntity.png" alt="cosmic entity"/>
   </div>
   <img id="ad" src="/assets/img/advertisment.png" alt="ad"/>
-  <script src="/assets/loginBundle.js"></script>
+  <script src="/assets/bundle.js"></script>
 </body>
 </html>

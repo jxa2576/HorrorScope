@@ -8,7 +8,8 @@ const router = (app) => {
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
   app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
-  app.get('/welcome', mid.requiresLogin, controllers.Welcome.welcomePage);
+  app.get('/welcome', mid.requiresLogin, controllers.Horror.welcomePage);
+  app.get('/compendium', mid.requiresLogin, controllers.Horror.compendium);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 

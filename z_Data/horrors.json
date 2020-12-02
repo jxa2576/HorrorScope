@@ -1,0 +1,13 @@
+[
+        {"name":"Gremlin", "poem":["dancing,", "they steal from you", "a chaotic jubilation"]},
+        {"name":"Spectre", "poem":["screaming, ", "they posses you", "a soulful mourning"]},
+        {"name":"Thing", "poem":["morphing, ", "they mimic you", "a mutated limb"]},
+        {"name":"Killer", "poem":["following, ", "they persue you", "a fantatic fantasy"]},
+        {"name":"Demon", "poem":["speaking, ", "they trick you", "a silver tongue"]},
+        {"name":"Revenant", "poem":["undying, ", "they break you", "an invisible weapon"]},
+        {"name":"Alien", "poem":["probing, ", "they test you", "a glowing brain"]},
+        {"name":"Beast", "poem":["howling, ", "they smell you", "a twitchin snout"]},
+        {"name":"Fungus", "poem":["growing, ", "they eat you", "a rotten root"]},
+        {"name":"Cube", "poem":["confusing, ", "they confound you", "a layered labyrinth"]},
+        {"name":"Gargoyle", "poem":["standing, ", "they watch you", "a unbroken gaze"]}
+]
